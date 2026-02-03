@@ -5,7 +5,7 @@ public abstract class Satellite {
 
     public Satellite(String name, double batteryLevel) {
         this.name = name;
-        this.energy = new EnergySystem(Math.max(0.0, Math.min(1.0, batteryLevel)));
+        this.energy = new EnergySystem(batteryLevel);
         this.state = new SatelliteState();
         notifyAboutSatelliteCreation();
     }

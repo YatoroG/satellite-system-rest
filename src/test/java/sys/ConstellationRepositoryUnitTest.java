@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import sys.domains.SatelliteConstellation;
+import sys.domains.satellites.SatelliteConstellation;
 import sys.repository.ConstellationRepository;
 
 
@@ -109,7 +109,7 @@ public class ConstellationRepositoryUnitTest {
         @DisplayName("Получение несуществующей группировки")
         void testGetNullConstellation() {
             assertTrue(repository.getAllConstellations().isEmpty());
-            assertThrows(RuntimeException.class, () -> repository.getConstellation(CONSTELLATION_1) );
+            assertThrows(RuntimeException.class, () -> repository.getConstellation(CONSTELLATION_1));
         }
     }
 }

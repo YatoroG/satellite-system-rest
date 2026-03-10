@@ -1,4 +1,4 @@
-package sys.domains;
+package sys.domains.satellites;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package sys.domains;
+package sys.domains.satellites;
 
 import sys.utils.SatelliteType;
 

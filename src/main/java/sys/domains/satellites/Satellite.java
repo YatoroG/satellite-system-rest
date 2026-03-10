@@ -1,4 +1,4 @@
-package sys.domains;
+package sys.domains.satellites;
 
 import sys.constants.EnergySystemConstants;
 
@@ -55,5 +55,5 @@ public abstract class Satellite {
         }
     }
 
-    protected abstract void performMission();
+    public abstract void performMission();
 }

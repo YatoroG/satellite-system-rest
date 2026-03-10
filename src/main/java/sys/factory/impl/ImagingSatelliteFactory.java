@@ -1,7 +1,10 @@
 package sys.factory.impl;
 
 import org.springframework.stereotype.Component;
-import sys.domains.*;
+import sys.domains.satellites.ImagingSatellite;
+import sys.domains.satellites.ImagingSatelliteParam;
+import sys.domains.satellites.Satellite;
+import sys.domains.satellites.SatelliteParam;
 import sys.factory.SatelliteFactory;
 import sys.utils.SatelliteType;
 import sys.utils.SpaceOperationException;

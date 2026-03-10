@@ -2,8 +2,8 @@ package sys.service.impl;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-import sys.domains.Satellite;
-import sys.domains.SatelliteParam;
+import sys.domains.satellites.Satellite;
+import sys.domains.satellites.SatelliteParam;
 import sys.factory.SatelliteFactory;
 import sys.service.SatelliteService;
 import sys.utils.SpaceOperationException;

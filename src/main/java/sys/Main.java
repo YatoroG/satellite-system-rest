@@ -3,15 +3,15 @@ package sys;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import sys.domains.CommunicationSatelliteParam;
-import sys.domains.ImagingSatelliteParam;
-import sys.domains.Satellite;
-import sys.domains.SatelliteParam;
+import sys.domains.satellites.CommunicationSatelliteParam;
+import sys.domains.satellites.ImagingSatelliteParam;
+import sys.domains.satellites.Satellite;
+import sys.domains.satellites.SatelliteParam;
 import sys.factory.SatelliteFactory;
 import sys.factory.impl.CommunicationSatelliteFactory;
 import sys.factory.impl.ImagingSatelliteFactory;
 import sys.repository.ConstellationRepository;
-import sys.service.SpaceOperationCenterService;
+import sys.service.ConstellationService;
 import sys.utils.SpaceOperationException;
 
 @SpringBootApplication
@@ -23,7 +23,7 @@ public class Main {
         ConfigurableApplicationContext ctx = SpringApplication.run(Main.class, args);
 
         ConstellationRepository repository = ctx.getBean(ConstellationRepository.class);
-        SpaceOperationCenterService operationCenterService = ctx.getBean(SpaceOperationCenterService.class);
+        ConstellationService operationCenterService = ctx.getBean(ConstellationService.class);
 
         System.out.println("СОЗДАНИЕ СПЕЦИАЛИЗИРОВАННЫХ СПУТНИКОВ:");
         System.out.println("============================================================");

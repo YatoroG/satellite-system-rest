@@ -1,4 +1,4 @@
-package sys.domains;
+package sys.domains.satellites;
 
 import lombok.Builder;
 
@@ -9,7 +9,9 @@ public class EnergySystem {
     private double max_battery;
     private double min_battery;
 
-    public double getBatteryLevel() { return batteryLevel; }
+    public double getBatteryLevel() {
+        return batteryLevel;
+    }
 
     public boolean consume(double batteryAmount) {
         if (batteryAmount <= 0 || batteryLevel <= min_battery) {

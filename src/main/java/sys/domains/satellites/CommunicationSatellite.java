@@ -1,4 +1,4 @@
-package sys.domains;
+package sys.domains.satellites;
 
 public class CommunicationSatellite extends Satellite {
     private final double bandwidth;

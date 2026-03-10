@@ -1,16 +1,14 @@
 package sys;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sys.domains.*;
-import sys.factory.SatelliteFactory;
+import sys.domains.satellites.*;
 import sys.factory.impl.CommunicationSatelliteFactory;
 import sys.factory.impl.ImagingSatelliteFactory;
 import sys.repository.ConstellationRepository;
-import sys.service.SpaceOperationCenterService;
+import sys.service.ConstellationService;
 import sys.utils.SpaceOperationException;
 
 
@@ -31,7 +29,7 @@ public class ConstellationRepositoryIntegrationTest {
     private ConstellationRepository repository;
 
     @Autowired
-    private SpaceOperationCenterService service;
+    private ConstellationService service;
 
     @Autowired
     private CommunicationSatelliteFactory commFactory;

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sys.domains.SatelliteConstellation;
+import sys.domains.satellites.SatelliteConstellation;
 import sys.repository.ConstellationRepository;
 
 

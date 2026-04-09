@@ -62,4 +62,14 @@ public class ConstellationService {
     public Map<String, SatelliteConstellation> getAllConstellations() {
         return repository.getAllConstellations();
     }
+
+    public void deleteSatelliteFromConstellation(String constellationName, String satelliteName) {
+        SatelliteConstellation constellation = repository.getConstellation(constellationName);
+        Satellite satellite = constellation.getSatelliteFromConstellation(satelliteName);
+        if (satellite == null) {
+            throw new RuntimeException("Спутник " + satelliteName + " не найден в группировке " + constellationName);
+        }
+        constellation.deleteSatellite(satellite);
+        System.out.println("Спутник '" + satelliteName + "' удален из группировки '" + constellationName + "'");
+    }
 }

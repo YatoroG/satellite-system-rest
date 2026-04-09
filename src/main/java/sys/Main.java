@@ -2,7 +2,10 @@ package sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import sys.configurations.SpaceCenterConfigReader;
 import sys.domains.satellites.CommunicationSatelliteParam;
 import sys.domains.satellites.ImagingSatelliteParam;
 import sys.domains.satellites.Satellite;
@@ -15,6 +18,8 @@ import sys.service.ConstellationService;
 import sys.utils.SpaceOperationException;
 
 @SpringBootApplication
+@EnableConfigurationProperties(SpaceCenterConfigReader.class)
+@EnableScheduling
 public class Main {
     public static void main(String[] args) throws SpaceOperationException {
         System.out.println("ЗАПУСК СИСТЕМЫ УПРАВЛЕНИЯ СПУТНИКОВОЙ ГРУППИРОВКОЙ");

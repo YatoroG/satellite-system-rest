@@ -1,6 +1,7 @@
 package sys.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sys.domains.requests.AddSatelliteRequest;
@@ -23,7 +24,7 @@ public class SpaceOperationController {
     @PostMapping("/add-satellites")
     public ResponseEntity<Void> addSatellites(@RequestBody AddSatelliteRequest request) throws SpaceOperationException {
         spaceOperationCenterService.addSatellite(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/overview")
@@ -33,8 +34,10 @@ public class SpaceOperationController {
     }
 
     @DeleteMapping("/{constellationName}/satellites/{satelliteName}")
-    public ResponseEntity<Void> deleteSatellite(String constellationName, String satelliteName) {
+    public ResponseEntity<Void> deleteSatellite(
+            @PathVariable String constellationName,
+            @PathVariable  String satelliteName) {
         spaceOperationCenterService.deleteSatellite(constellationName, satelliteName);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

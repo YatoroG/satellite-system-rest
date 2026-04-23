@@ -1,1 +1,1 @@
-rootProject.name = "satellite-system"
+rootProject.name = "satellite-system-rest"

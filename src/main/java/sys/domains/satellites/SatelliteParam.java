@@ -1,7 +1,18 @@
 package sys.domains.satellites;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import sys.utils.SatelliteType;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CommunicationSatelliteParam.class, name = "COMMUNICATION"),
+        @JsonSubTypes.Type(value = ImagingSatelliteParam.class, name = "IMAGE")
+})
 public abstract class SatelliteParam {
     private final SatelliteType type;
     private final String name;

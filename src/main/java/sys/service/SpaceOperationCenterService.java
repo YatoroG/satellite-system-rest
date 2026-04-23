@@ -73,5 +73,9 @@ public class SpaceOperationCenterService {
 
         return sb.toString();
     }
+
+    public void deleteSatellite(String constellationName, String satelliteName) {
+        constellationService.deleteSatelliteFromConstellation(constellationName, satelliteName);
+    }
 }
 

@@ -2,8 +2,10 @@ package sys.domains.satellites;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 public class SatelliteConstellation {
+    @Getter
     private final String constellationName;
     private final List<Satellite> satellites = new ArrayList<>();
 
@@ -23,11 +25,17 @@ public class SatelliteConstellation {
         }
     }
 
-    public String getConstellationName() {
-        return constellationName;
-    }
-
     public List<Satellite> getSatellites() {
         return new ArrayList<>(satellites);
+    }
+
+    public Satellite getSatelliteFromConstellation(String satelliteName) {
+        return satellites.stream().filter(s -> s.getName().equals(satelliteName)).findFirst().orElse(null);
+    }
+
+    public void deleteSatellite(Satellite satellite) {
+        if (satellite != null) {
+            satellites.remove(satellite);
+        }
     }
 }

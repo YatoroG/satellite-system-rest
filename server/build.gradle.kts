@@ -18,7 +18,7 @@ java {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-aop")
-
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation ("org.springframework.boot:spring-boot-starter-web")
     implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
     implementation("org.apache.commons:commons-lang3:3.18.0")

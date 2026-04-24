@@ -1,4 +1,4 @@
-FROM gradle:8.5-jdk17-alpine AS builder
+FROM gradle:8-jdk17 AS builder
 WORKDIR /app
 
 COPY build.gradle.kts settings.gradle.kts ./
@@ -7,10 +7,10 @@ RUN gradle dependencies --no-daemon
 COPY src ./src
 RUN gradle bootJar -x test --no-daemon
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
 COPY --from=builder --chown=appuser:appgroup /app/build/libs/*.jar app.jar
 

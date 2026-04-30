@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sys.domains.satellites.Satellite;
 import sys.domains.satellites.SatelliteParam;
-import sys.factory.SatelliteFactory;
 import sys.repository.SatelliteRepository;
 import sys.utils.SpaceOperationException;
 
@@ -16,10 +15,10 @@ import sys.utils.SpaceOperationException;
 @Transactional
 public class SatelliteService {
     private final SatelliteRepository satelliteRepository;
-    private final SatelliteFactory satelliteFactory;
+    private final SatelliteFactoryService satelliteFactoryService;
 
     public Satellite createSatellite(SatelliteParam param) throws SpaceOperationException {
-        Satellite satellite = satelliteFactory.createSatelliteWithParameter(param);
+        Satellite satellite = satelliteFactoryService.createSatellite(param);
         return satelliteRepository.save(satellite);
     }
 

@@ -1,41 +1,47 @@
 package sys.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sys.domains.requests.AddSatelliteRequest;
 import sys.domains.requests.MissionRequest;
 import sys.domains.satellites.Satellite;
+import sys.domains.satellites.SatelliteConstellation;
 import sys.domains.satellites.SatelliteParam;
 import sys.utils.SpaceOperationException;
 
+
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class SpaceOperationCenterService {
     private final ConstellationService constellationService;
-
     private final SatelliteService satelliteService;
 
     public void addSatellite(AddSatelliteRequest request) throws SpaceOperationException {
+        SatelliteConstellation constellation;
         try {
-            constellationService.showConstellationStatus(request.constellationName());
-        } catch (Exception e) {
-            constellationService.createAndSaveConstellation(request.constellationName());
+            constellation = constellationService.getConstellationByName(request.constellationName());
+        } catch (RuntimeException e) {
+            constellation = constellationService.createAndSaveConstellation(request.constellationName());
         }
 
         for (SatelliteParam param : request.satelliteParams()) {
             Satellite satellite = satelliteService.createSatellite(param);
-            constellationService.addSatelliteToConstellation(request.constellationName(), satellite);
+            constellationService.addSatelliteToConstellation(constellation.getId(), satellite.getId());
         }
     }
 
     public void executeMission(MissionRequest request) {
         switch (request.targetType()) {
             case SINGLE -> {
-                var constellation = constellationService.getConstellation(request.constellationName());
+                var constellation = constellationService.getConstellationByName(request.constellationName());
                 var satellite = constellation.getSatellites().stream()
                         .filter(s -> s.getName().equals(request.satelliteName()))
                         .findFirst()
                         .orElseThrow(() -> new RuntimeException("Спутник не найден: " + request.satelliteName()));
+
                 satellite.activate();
                 satellite.performMission();
             }
@@ -47,14 +53,14 @@ public class SpaceOperationCenterService {
     }
 
     public String getSystemOverview() {
-        var allConstellations = constellationService.getAllConstellations();
+        List<SatelliteConstellation> allConstellations = constellationService.getAllConstellations();
         StringBuilder sb = new StringBuilder("=== СИСТЕМНАЯ СВОДКА ===\n");
 
         sb.append("Всего группировок: ")
                 .append(allConstellations.size())
                 .append("\n");
 
-        allConstellations.values().forEach(cons -> {
+        allConstellations.forEach(cons -> {
             sb.append("  Группировка '")
                     .append(cons.getConstellationName())
                     .append("': спутников ")
@@ -78,4 +84,5 @@ public class SpaceOperationCenterService {
         constellationService.deleteSatelliteFromConstellation(constellationName, satelliteName);
     }
 }
+
 

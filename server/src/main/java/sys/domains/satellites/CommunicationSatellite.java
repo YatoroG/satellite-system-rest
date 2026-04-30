@@ -1,10 +1,18 @@
 package sys.domains.satellites;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
+@Entity
+@DiscriminatorValue("COMMUNICATION")
+@NoArgsConstructor
 public class CommunicationSatellite extends Satellite {
-    private final double bandwidth;
+    private double bandwidth;
 
     public CommunicationSatellite(String name, double batteryLevel, double bandwidth) {
         super(name, batteryLevel);
@@ -26,13 +34,5 @@ public class CommunicationSatellite extends Satellite {
         if (state.isActive()) {
             System.out.println(name + ": Отправил " + bandwidth + " Мбит данных!");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "CommunicationSatellite{bandwidth=" + bandwidth +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                ", energy=" + energy + "}";
     }
 }

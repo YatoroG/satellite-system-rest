@@ -1,26 +1,42 @@
 package sys.domains.satellites;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "energy_system")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class EnergySystem {
-    @Getter
-    protected double batteryLevel;
-    private double low_battery_threshold;
-    private double max_battery;
-    private double min_battery;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public boolean consume(double batteryAmount) {
-        if (batteryAmount <= 0 || batteryLevel <= min_battery) {
-            return false;
+    @Column(name = "battery_level", nullable = false)
+    protected double batteryLevel;
+
+    @Column(name = "low_battery_threshold", nullable = false)
+    private double lowBatteryThreshold;
+
+    @Column(name = "max_battery", nullable = false)
+    private double maxBattery;
+
+    @Column(name = "min_battery", nullable = false)
+    private double minBattery;
+
+    public void consume(double batteryAmount) {
+        if (batteryAmount > 0 || batteryLevel > minBattery) {
+            batteryLevel = Math.max(minBattery, batteryLevel - batteryAmount);
         }
-        batteryLevel = Math.max(min_battery, batteryLevel - batteryAmount);
-        return true;
     }
 
     public boolean hasSufficientPower() {
-        return batteryLevel > low_battery_threshold;
+        return batteryLevel > lowBatteryThreshold;
     }
 
     @Override

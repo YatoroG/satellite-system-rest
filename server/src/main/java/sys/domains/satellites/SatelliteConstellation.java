@@ -2,11 +2,27 @@ package sys.domains.satellites;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Entity
+@Table(name = "satellite_constellation")
+@Getter
+@Setter
+@NoArgsConstructor
 public class SatelliteConstellation {
-    @Getter
-    private final String constellationName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", nullable = false, unique = true)
+    private String constellationName;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "constellation", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private final List<Satellite> satellites = new ArrayList<>();
 
     public SatelliteConstellation(String constellationName) {

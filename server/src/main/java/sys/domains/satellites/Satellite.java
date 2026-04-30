@@ -1,21 +1,46 @@
 package sys.domains.satellites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import sys.constants.EnergySystemConstants;
 
+@Entity
+@Table(name = "satellite")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "satellite_type", discriminatorType = DiscriminatorType.STRING)
 @Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Satellite {
-    protected final String name;
-    protected final SatelliteState state;
-    protected final EnergySystem energy;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    protected String name;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "constellation_id")
+    protected SatelliteConstellation constellation;
+
+    @Embedded
+    protected SatelliteState state;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "energy_id", unique = true)
+    protected EnergySystem energy;
 
     public Satellite(String name, double batteryLevel) {
         this.name = name;
         this.energy = EnergySystem.builder()
                 .batteryLevel(batteryLevel)
-                .low_battery_threshold(EnergySystemConstants.LOW_BATTERY_THRESHOLD)
-                .max_battery(EnergySystemConstants.MAX_BATTERY)
-                .min_battery(EnergySystemConstants.MIN_BATTERY)
+                .lowBatteryThreshold(EnergySystemConstants.LOW_BATTERY_THRESHOLD)
+                .maxBattery(EnergySystemConstants.MAX_BATTERY)
+                .minBattery(EnergySystemConstants.MIN_BATTERY)
                 .build();
         this.state = new SatelliteState();
         notifyAboutSatelliteCreation();

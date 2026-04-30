@@ -1,10 +1,18 @@
 package sys.domains.satellites;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
+@ToString
+@Entity
+@DiscriminatorValue("IMAGING")
+@NoArgsConstructor
 public class ImagingSatellite extends Satellite {
-    private final double resolution;
+    private double resolution;
     private int photosTaken;
 
     public ImagingSatellite(String name, double batteryLevel, double resolution) {
@@ -29,12 +37,5 @@ public class ImagingSatellite extends Satellite {
             photosTaken++;
             System.out.println(name + ": Снимок #" + photosTaken + " сделан");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "ImagingSatellite{resolution=" + resolution +
-                ", photosTaken=" + photosTaken + ", name='" + name + '\'' +
-                ", state=" + state + ", energy=" + energy + "}";
     }
 }

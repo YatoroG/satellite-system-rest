@@ -1,8 +1,12 @@
 package sys.domains.satellites;
 
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 @Getter
+@Embeddable
 public class SatelliteState {
     private boolean isActive = false;
     private String statusMessage;
@@ -24,13 +28,5 @@ public class SatelliteState {
     public void deactivate() {
         isActive = false;
         statusMessage = "Деактивирован";
-    }
-
-    @Override
-    public String toString() {
-        return "SatelliteState{" +
-                "isActive=" + isActive +
-                ", statusMessage='" + statusMessage + '\'' +
-                '}';
     }
 }

@@ -32,5 +32,4 @@ CREATE TABLE imaging_satellite (
 );
 
 CREATE INDEX idx_satellite_constellation_id ON satellite(constellation_id);
-CREATE INDEX idx_satellite_type ON satellite(satellite_type);
 CREATE INDEX idx_satellite_name ON satellite(name);

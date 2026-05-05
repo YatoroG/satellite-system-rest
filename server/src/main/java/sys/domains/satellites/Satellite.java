@@ -10,7 +10,7 @@ import sys.constants.EnergySystemConstants;
 
 @Entity
 @Table(name = "satellite")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "satellite_type", discriminatorType = DiscriminatorType.STRING)
 @Getter
 @Setter

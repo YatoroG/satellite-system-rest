@@ -23,3 +23,12 @@ spring:
   sql:
     init:
       mode: ${SPRING_SQL_INIT_MODE:always}
+
+grpc:
+  client:
+    telemetry-service:
+      address: static://telemetry-service:9092
+      negotiationType: plaintext
+      enable-keep-alive: true
+      keep-alive-time: 30s
+      keep-alive-timeout: 5s

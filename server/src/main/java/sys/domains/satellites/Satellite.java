@@ -22,6 +22,12 @@ public abstract class Satellite {
 
     protected String name;
 
+    @Column(name = "temperature_inside")
+    private double temperatureInside;
+
+    @Column(name = "temperature_outside")
+    private double temperatureOutside;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "constellation_id")

@@ -3,7 +3,7 @@ plugins {
     id("jacoco")
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.protobuf") version "0.9.4"
+    id("com.google.protobuf") version "0.10.0"
 }
 
 repositories {
@@ -64,11 +64,11 @@ tasks.jacocoTestReport {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.25.1:windows-x86_64"
+        artifact = "com.google.protobuf:protoc:3.22.0"
     }
     plugins {
         create("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.62.2:windows-x86_64"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.54.0"
         }
     }
     generateProtoTasks {

@@ -18,6 +18,8 @@ CREATE TABLE satellite (
     energy_id BIGINT UNIQUE REFERENCES energy_system(id) ON DELETE CASCADE,
     is_active BOOLEAN NOT NULL DEFAULT FALSE,
     status_message VARCHAR(255)
+    temperature_inside DOUBLE PRECISION NOT NULL,
+    temperature_outside DOUBLE PRECISION NOT NULL
 );
 
 CREATE TABLE communication_satellite (

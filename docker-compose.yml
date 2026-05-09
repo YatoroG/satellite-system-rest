@@ -29,7 +29,7 @@ services:
         condition: service_healthy
     environment:
       - SERVER_PORT=8081
-      - SERVER_URL=http://server:8080
+      - SERVER_URL=http://server:8080/api
     ports:
       - "8081:8081"
     networks:

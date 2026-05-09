@@ -11,7 +11,6 @@ import sys.constants.EnergySystemConstants;
 @Entity
 @Table(name = "satellite")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "satellite_type", discriminatorType = DiscriminatorType.STRING)
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

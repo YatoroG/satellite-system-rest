@@ -9,7 +9,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@DiscriminatorValue("COMMUNICATION")
 @NoArgsConstructor
 public class CommunicationSatellite extends Satellite {
     private double bandwidth;

@@ -9,7 +9,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@DiscriminatorValue("IMAGING")
 @NoArgsConstructor
 public class ImagingSatellite extends Satellite {
     private double resolution;

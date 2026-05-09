@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package sys;
+
+option java_multiple_files = true;
+option java_package = "sys.telemetry";
+
+service TelemetryService {
+    rpc StreamTelemetry (TelemetryRequest) returns (stream TelemetryUpdate);
+}
+
+message TelemetryRequest {
+    int64 satellite_id = 1;
+}
+
+message TelemetryUpdate {
+    int64 satellite_id = 1;
+    double temperature_inside = 2;
+    double temperature_outside = 3;
+    int64 timestamp = 4;
+}

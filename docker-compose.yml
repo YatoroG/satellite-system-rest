@@ -28,12 +28,34 @@ services:
       server:
         condition: service_healthy
     environment:
-      - SERVER_PORT=8881
-      - SERVER_URL:http://localhost:8080
+      - SERVER_PORT=8081
+      - SERVER_URL=http://server:8080/api
     ports:
       - "8081:8081"
     networks:
       - space-net
+
+  telemetry-service:
+    build: ./telemetry-service
+    container_name: telemetry-service
+    environment:
+      - SERVER_PORT=8082
+      - GRPC_SERVER_PORT=9092
+    ports:
+      - "8082:8082"
+      - "9092:9092"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - space-net
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z localhost 9092" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   db:
     image: postgres:16-alpine

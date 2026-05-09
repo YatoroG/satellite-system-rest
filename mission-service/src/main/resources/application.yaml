@@ -3,7 +3,7 @@ server:
 
 app:
   space-center-service:
-    url: "http://localhost:8080/api"
+    url: ${SERVER_URL}
     missions:
       - targetType: CONSTELLATION
         constellationName: "GeoStationary"

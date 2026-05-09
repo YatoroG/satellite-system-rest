@@ -42,8 +42,8 @@ public class ConstellationController {
     }
 
     @PostMapping("/{constellationId}/satellites")
-    public ResponseEntity<Void> addSatelliteToConstellation(@PathVariable Long id, @RequestBody AddSatelliteRequest request) {
-        constellationService.addSatelliteToConstellation(id, request.satelliteId);
+    public ResponseEntity<Void> addSatelliteToConstellation(@PathVariable Long constellationId, @RequestBody AddSatelliteRequest request) {
+        constellationService.addSatelliteToConstellation(constellationId, request.satelliteId);
         return ResponseEntity.ok().build();
     }
 }

@@ -1,7 +1,11 @@
 package sys.domains;
 
-import org.junit.jupiter.api.*;
-import sys.domains.satellites.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import sys.domains.satellites.Satellite;
+import sys.domains.satellites.SatelliteConstellation;
 
 
 import static org.junit.jupiter.api.Assertions.*;

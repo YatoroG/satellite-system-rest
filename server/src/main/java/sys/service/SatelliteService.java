@@ -32,12 +32,13 @@ public class SatelliteService {
         return satelliteRepository.findById(id);
     }
 
-    public Satellite updateSatellite(Long id, Satellite updatedSatellite) {
-        if (!satelliteRepository.existsById(id)) {
-            throw new RuntimeException("Спутник с id = " + id + " не найден");
+    public Satellite updateSatellite(Long id, String newName) {
+        Satellite satellite = satelliteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Спутник не найден"));
+        if (newName != null && !newName.isBlank()) {
+            satellite.setName(newName);
         }
-        updatedSatellite.setId(id);
-        return satelliteRepository.save(updatedSatellite);
+        return satelliteRepository.save(satellite);
     }
 
     public void deleteSatellite(Long id) {

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sys.domains.requests.UpdateSatelliteRequest;
 import sys.domains.satellites.Satellite;
 import sys.domains.satellites.SatelliteParam;
 import sys.service.SatelliteService;
@@ -35,8 +36,8 @@ public class SatelliteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Satellite> updateSatellite(@PathVariable Long id, @RequestBody Satellite satellite) {
-        Satellite updatedSatellite = satelliteService.updateSatellite(id, satellite);
+    public ResponseEntity<Satellite> updateSatellite(@PathVariable Long id, @RequestBody UpdateSatelliteRequest request) {
+        Satellite updatedSatellite = satelliteService.updateSatellite(id, request.satelliteName());
         return ResponseEntity.ok(updatedSatellite);
     }
 

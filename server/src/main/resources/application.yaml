@@ -42,7 +42,7 @@ spring:
 grpc:
   client:
     telemetry-service:
-      address: static://telemetry-service:9092
+      address: static://telemetry-service:9090
       negotiationType: plaintext
       enable-keep-alive: true
       keep-alive-time: 30s

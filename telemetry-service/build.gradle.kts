@@ -28,6 +28,8 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-web")
     implementation("org.apache.commons:commons-lang3:3.18.0")
 
+    implementation("org.springframework.kafka:spring-kafka")
+
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 }

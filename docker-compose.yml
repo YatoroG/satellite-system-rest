@@ -41,6 +41,11 @@ services:
     container_name: telemetry-service
     environment:
       - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/satellite_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9093
       - GRPC_SERVER_PORT=9090
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9093
     ports:

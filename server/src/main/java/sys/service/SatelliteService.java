@@ -10,6 +10,7 @@ import sys.domains.satellites.SatelliteParam;
 import sys.kafka.KafkaService;
 import sys.kafka.KafkaUtils;
 import sys.kafka.SatelliteEvent;
+import sys.kafka.outbox.OutboxService;
 import sys.repository.SatelliteRepository;
 import sys.utils.SpaceOperationException;
 
@@ -21,13 +22,13 @@ public class SatelliteService {
 
     private final SatelliteRepository satelliteRepository;
     private final SatelliteFactoryService satelliteFactoryService;
-    private final KafkaService kafkaService;
+    private final OutboxService outboxService;
 
     public Satellite createSatellite(SatelliteParam param) throws SpaceOperationException {
         Satellite satellite = satelliteFactoryService.createSatellite(param);
         Satellite saved = satelliteRepository.save(satellite);
-        kafkaService.sentToKafkaSatellite(
-                SATELLITE_EVENTS_TOPIC,
+        outboxService.publishToOutbox(
+                saved.getId(),
                 KafkaUtils.createEvent(saved, SatelliteEvent.EventType.CREATED)
         );
         return saved;
@@ -58,8 +59,8 @@ public class SatelliteService {
 
         satelliteRepository.deleteById(id);
 
-        kafkaService.sentToKafkaSatellite(
-                SATELLITE_EVENTS_TOPIC,
+        outboxService.publishToOutbox(
+                id,
                 KafkaUtils.createEvent(satellite, SatelliteEvent.EventType.DELETED)
         );
     }

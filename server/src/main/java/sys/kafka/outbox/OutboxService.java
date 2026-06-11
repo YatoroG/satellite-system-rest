@@ -60,7 +60,7 @@ public class OutboxService {
                 );
 
                 outboxEventRepository.updateStatus(event.getId(), OutboxEvent.OutboxStatus.SENT);
-                log.error("Outbox event {} sent to Kafka", event.getId());
+                log.info("Outbox event {} sent to Kafka", event.getId());
             } catch (Exception e) {
                 log.error("Failed to sent outbox event {}: {}", event.getId(), e.getMessage());
                 outboxEventRepository.updateStatus(event.getId(), OutboxEvent.OutboxStatus.FAILED);

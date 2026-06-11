@@ -26,9 +26,8 @@ spring:
         format sql: true
   sql:
     init:
-      mode: $(SPRING_SQL_INIT_MODE:never}
+      mode: ${SPRING_SQL_INIT_MODE:never}
   kafka:
-    # Берет из Docker значение kafka:9093
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:29093}
     properties:
       security.protocol: PLAINTEXT

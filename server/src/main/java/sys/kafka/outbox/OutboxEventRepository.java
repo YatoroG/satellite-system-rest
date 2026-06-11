@@ -13,6 +13,6 @@ public interface OutboxEventRepository extends JpaRepository<OutboxEvent, UUID> 
     List<OutboxEvent> findByStatusOrderByCreatedAtAsc(@Param("status") OutboxEvent.OutboxStatus status, Pageable pageable);
 
     @Modifying
-    @Query("UPDATE OutboxEvent o SET o.status = :status WHERE o.id = : id")
+    @Query("UPDATE OutboxEvent o SET o.status = :status WHERE o.id = :id")
     void updateStatus(@Param("id") UUID id, @Param("status") OutboxEvent.OutboxStatus status);
 }

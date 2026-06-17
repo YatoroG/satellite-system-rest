@@ -21,12 +21,15 @@ dependencies {
     implementation("io.grpc:grpc-protobuf:1.62.2")
     implementation("io.grpc:grpc-stub:1.62.2")
     compileOnly("org.apache.tomcat:annotations-api:6.0.53")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-aop")
 
     implementation ("org.springframework.boot:spring-boot-starter-web")
     implementation("org.apache.commons:commons-lang3:3.18.0")
+
+    runtimeOnly("org.postgresql:postgresql")
 
     implementation("org.springframework.kafka:spring-kafka")
 

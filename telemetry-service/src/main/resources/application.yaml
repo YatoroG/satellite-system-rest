@@ -12,8 +12,22 @@ management:
         include: "*"
 
 spring:
+  datasource:
+    url: $[SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/satellite_db)
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:none}
+  show-sql: true
+  properties:
+      hibernate:
+        format sql: true
+  sql:
+    init:
+      mode: ${SPRING_SQL_INIT_MODE:never}
   kafka:
-    # Берет из Docker значение kafka:9093
     bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:29093}
     properties:
       security.protocol: PLAINTEXT

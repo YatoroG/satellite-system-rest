@@ -1,5 +1,6 @@
 package sys.domains.satellites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import lombok.ToString;
 @Getter
 @Embeddable
 public class SatelliteState {
+    @JsonIgnore
     private boolean isActive = false;
     private String statusMessage;
 
